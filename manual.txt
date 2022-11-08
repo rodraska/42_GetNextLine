@@ -1,0 +1,5 @@
+Bem-vindos ao meu documento
+Ele foi criado manualmente por mim
+Nao usei funcoes nenhumas
+Esta e a quarta linha do documento
+E esta e a ultima linha do documento
