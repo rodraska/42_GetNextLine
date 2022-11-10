@@ -5,34 +5,19 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rreis-de <rreis-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 13:11:43 by rreis-de          #+#    #+#             */
-/*   Updated: 2022/11/07 14:25:27 by rreis-de         ###   ########.fr       */
+/*   Created: 2022/11/10 15:25:30 by rreis-de          #+#    #+#             */
+/*   Updated: 2022/11/10 15:29:05 by rreis-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-
-int add(int y)
-{
-    static int soma;
-    
-    soma = y;
-    soma += 10;
-    return (soma);
-}
-
-int mult(int x)
-{
-    static int multi = 1;
-    
-    multi *= x;
-    return (multi);
-}
+#include "get_next_line.h"
 
 int main(void)
 {
-    mult(5);
-    printf("%d\n", add(mult(4)));
+    char    buf[10];
+    if(!buf[0])
+        printf("haha");
+    else if (buf[0])
+        printf("hehe");
     return (0);
 }
-

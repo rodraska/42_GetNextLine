@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test3.c                                            :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rreis-de <rreis-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/08 14:00:58 by rreis-de          #+#    #+#             */
-/*   Updated: 2022/11/08 15:01:46 by rreis-de         ###   ########.fr       */
+/*   Created: 2022/11/10 11:24:56 by rreis-de          #+#    #+#             */
+/*   Updated: 2022/11/10 14:25:02 by rreis-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-int main(void)
-{
-    FILE *fp;
+# include <unistd.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <fcntl.h>
 
-    fp = fopen("documento.txt", "w+");
-    if (fp == NULL)
-        return (1);
-    fprintf(fp, "%s %s %d\n", "Hello", "People", 42);
-    
-    char str[] = "Welcome to our school!\n";
-    fwrite(str, 1, sizeof(str) - 1, fp);
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 10
+# endif
 
-    fclose(fp);
-    return (0);
-}
+char	*get_next_line(int fd);
+char	*ft_strjoin(char *s1, char *s2);
+size_t	ft_strlen(const char *str);
+void	*ft_calloc(size_t nitems, size_t size);
+
+#endif
