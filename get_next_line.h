@@ -6,7 +6,7 @@
 /*   By: rreis-de <rreis-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 11:24:56 by rreis-de          #+#    #+#             */
-/*   Updated: 2022/11/11 17:01:42 by rreis-de         ###   ########.fr       */
+/*   Updated: 2022/11/12 14:21:06 by rreis-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,9 @@
 # endif
 
 char	*get_next_line(int fd);
-size_t	ft_strlen(const char *str);
-char	*new_join(char *line, char *buf, int max);
+int		ft_strlen(const char *str);
+char	*new_join(char *line, char *buf);
 int		search_int(char *buf, int c);
 void	shift_buf(char *buf, int max);
-
-
 
 #endif

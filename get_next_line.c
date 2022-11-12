@@ -6,33 +6,29 @@
 /*   By: rreis-de <rreis-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 16:00:30 by rreis-de          #+#    #+#             */
-/*   Updated: 2022/11/11 18:01:44 by rreis-de         ###   ########.fr       */
+/*   Updated: 2022/11/12 14:49:34 by rreis-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*new_join(char *line, char *buf, int max)
+char	*new_join(char *line, char *buf)
 {
 	int		i;
-	int		index;
+	int		k;
 	int		len;
 	char	*new_line;
 
 	i = -1;
-	index = -1;
-	len = 0;
-	if (max == -1)
-		max = BUFFER_SIZE;
-	if (line[0])
-		len = ft_strlen(line);
-	new_line = (char *)malloc(len + max + 1);
+	k = -1;
+	len = ft_strlen(line) + ft_strlen(buf);
+	new_line = (char *)malloc(len + 1);
 	if (!new_line)
 		return (NULL);
-	while (++i < len)
+	while (++i < ft_strlen(line))
 		new_line[i] = line[i];
-	while (++index <= max)
-		new_line[i++] = buf[index];
+	while (++k < ft_strlen(buf))
+		new_line[i++] = buf[k];
 	new_line[i] = 0;
 	return (new_line);
 }
@@ -58,13 +54,13 @@ void	shift_buf(char *buf, int max)
 
 	i = 0;
 	index = max + 1;
-	while (index < 10)
+	while (index < BUFFER_SIZE)
 	{
 		buf[i] = buf[index];
 		i++;
 		index++;
 	}
-	while (i < 10)
+	while (i < BUFFER_SIZE)
 	{
 		buf[i] = 0;
 		i++;
@@ -75,55 +71,37 @@ char	*get_next_line(int fd)
 {
 	char		*line;
 	static char	buf[BUFFER_SIZE];
-	int			max;
-	int			cread;
+	int			flag;
 
 	if (BUFFER_SIZE <= 0 || fd < 0)
 		return (NULL);
-	if (*line)
-		free(line);
-	
-	printf("line begin :%s\n", line);
+	line = NULL;
+	flag = 0;
 	if (buf[0])
+		line = new_join(line, buf);
+	while (read(fd, buf, BUFFER_SIZE) > 0 && flag == 0)
 	{
-		max = search_int(buf, 0);
-		line = new_join(line, buf, max);
-	}
-	while (1)
-	{
-		cread = read(fd, buf, BUFFER_SIZE);
-		if (cread < BUFFER_SIZE)
+		line = new_join(line, buf);
+		if (search_int(buf, 10) != -1)
 		{
-			new_join(line, buf, cread - 1);
-			break ;
-		}
-		max = search_int(buf, 0);
-		if (max >= 0)
-		{
-			new_join(line, buf, max);
-			break ;
-		}
-		printf("ola\n");
-		max = search_int(buf, 10);
-		line = new_join(line, buf, max);
-		if (max >= 0)
-		{
-			shift_buf(buf, max);
+			shift_buf(buf, search_int(buf, 10));
 			break ;
 		}
 	}
-	printf("line end :%s", line);
-	printf("rest buf :%s\n\n", buf);
 	return (line);
 }
 
-int main(void)
+/* int main(void)
 {
+	char	*s;
 	int fd = open("manual.txt", O_RDONLY, 00700);
 	printf("fd nb: %d\n", fd);
-	get_next_line(fd);
-	get_next_line(fd);
-	get_next_line(fd);
-	get_next_line(fd);
-	get_next_line(fd);
-}
+	printf("res : %s", get_next_line(fd));
+	printf("res : %s", get_next_line(fd));
+	printf("res : %s", get_next_line(fd));
+	printf("res : %s", get_next_line(fd));
+	printf("res : %s", get_next_line(fd));
+	//printf("res : %s", get_next_line(fd));
+	//s = get_next_line(fd);
+	//printf("s: %s\n", s);
+} */
