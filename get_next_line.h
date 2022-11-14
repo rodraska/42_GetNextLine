@@ -6,7 +6,7 @@
 /*   By: rreis-de <rreis-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 11:24:56 by rreis-de          #+#    #+#             */
-/*   Updated: 2022/11/12 14:21:06 by rreis-de         ###   ########.fr       */
+/*   Updated: 2022/11/14 19:31:40 by rreis-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ int		ft_strlen(const char *str);
 char	*new_join(char *line, char *buf);
 int		search_int(char *buf, int c);
 void	shift_buf(char *buf, int max);
+void	*ft_memset(void *str, int c, size_t n);
 
 #endif
