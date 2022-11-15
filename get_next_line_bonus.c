@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rreis-de <rreis-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/08 16:00:30 by rreis-de          #+#    #+#             */
-/*   Updated: 2022/11/15 16:36:14 by rreis-de         ###   ########.fr       */
+/*   Created: 2022/11/15 16:36:30 by rreis-de          #+#    #+#             */
+/*   Updated: 2022/11/15 16:43:37 by rreis-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*new_join(char *line, char *buf)
 {
@@ -76,60 +76,27 @@ void	shift_buf(char *buf, int max)
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	buf[BUFFER_SIZE + 1];
+	static char	buf[1024][BUFFER_SIZE + 1];
 
 	if (BUFFER_SIZE <= 0 || (read(fd, 0, 0) < 0))
 		return (NULL);
 	line = NULL;
-	line = new_join(line, buf);
-	if (search_int(buf, 10) != -1)
+	line = new_join(line, buf[fd]);
+	if (search_int(buf[fd], 10) != -1)
 	{
-		shift_buf(buf, search_int(buf, 10));
+		shift_buf(buf[fd], search_int(buf[fd], 10));
 		return (line);
 	}
-	ft_memset(buf, 0, BUFFER_SIZE);
-	while (read(fd, buf, BUFFER_SIZE) > 0)
+	ft_memset(buf[fd], 0, BUFFER_SIZE);
+	while (read(fd, buf[fd], BUFFER_SIZE) > 0)
 	{
-		line = new_join(line, buf);
-		if (search_int(buf, 10) != -1)
+		line = new_join(line, buf[fd]);
+		if (search_int(buf[fd], 10) != -1)
 		{
-			shift_buf(buf, search_int(buf, 10));
+			shift_buf(buf[fd], search_int(buf[fd], 10));
 			break ;
 		}
-		ft_memset(buf, 0, BUFFER_SIZE);
+		ft_memset(buf[fd], 0, BUFFER_SIZE);
 	}
 	return (line);
 }
-
-/* int main(void)
-{
-	
-	int fd = open("error.txt", O_RDONLY, 00700);
-	char	*s = get_next_line(fd);
-	printf("%s", s);
-	s = get_next_line(fd);
-	printf("%s", s);
-	if (BUFFER_SIZE > 100)
-	{
-		char	*temp;
-		do {
-			temp = get_next_line(fd);
-			free(temp);
-		} while (temp != NULL);
-	}
-	s = get_next_line(fd);
-	printf("%s", s);
-	close (fd);
-	fd = open("error.txt", O_RDONLY, 00700);
-	s = get_next_line(fd);
-	printf("%s", s);
-	s = get_next_line(fd);
-	printf("%s", s);
-	s = get_next_line(fd);
-	printf("%s", s);
-	s = get_next_line(fd);
-	printf("%s", s);
-	s = get_next_line(fd);
-	printf("%s", s);
-	return (0);
-} */
