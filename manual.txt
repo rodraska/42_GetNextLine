@@ -1,4 +1,8 @@
-Bem-vindos ao meu documento
+Bem-v
+in
+dos
+ ao 
+ meu documento
 Ele foi criado manualmente por mim
 Nao usei funcoes nenhumas
 Esta e a quarta linha do documento

@@ -5,37 +5,47 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rreis-de <rreis-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/10 12:14:32 by rreis-de          #+#    #+#             */
-/*   Updated: 2022/11/14 17:45:24 by rreis-de         ###   ########.fr       */
+/*   Created: 2023/01/12 13:38:45 by rreis-de          #+#    #+#             */
+/*   Updated: 2023/01/12 14:27:00 by rreis-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	ft_strlen(const char *str)
+int	ft_strlen(char *str)
 {
 	int	i;
 
 	i = 0;
 	if (!str)
 		return (0);
-	while (str[i] && str[i] != '\n')
+	while (str[i] && str[i] != 10)
 		i++;
-	if (str[i] == '\n')
+	if (str[i] == 10)
 		i++;
 	return (i);
 }
 
-void	*ft_memset(void *str, int c, size_t n)
+char	*ft_strjoin(char *line, char *buf)
 {
-	unsigned char	*hold;
+	char	*new_line;
+	int		i;
+	int		k;
+	int		buf_len;
+	int		line_len;
 
-	hold = (unsigned char *)str;
-	while (n > 0)
-	{
-		*hold = (unsigned char)c;
-		hold++;
-		n--;
-	}
-	return (str);
+	buf_len = ft_strlen(buf);
+	line_len = ft_strlen(line);
+	new_line = (char *)malloc(buf_len + line_len + 1);
+	if (!new_line)
+		return (NULL);
+	i = -1;
+	k = -1;
+	while (++i < line_len)
+		new_line[i] = line[i];
+	while (++k < buf_len)
+		new_line[i++] = buf[k];
+	new_line[i] = 0;
+	free(line);
+	return (new_line);
 }

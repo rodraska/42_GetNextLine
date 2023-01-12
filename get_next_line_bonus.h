@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rreis-de <rreis-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/15 16:43:00 by rreis-de          #+#    #+#             */
-/*   Updated: 2022/11/15 16:43:11 by rreis-de         ###   ########.fr       */
+/*   Created: 2023/01/12 14:31:20 by rreis-de          #+#    #+#             */
+/*   Updated: 2023/01/12 14:31:31 by rreis-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,11 @@
 # include <fcntl.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1000000
+#  define BUFFER_SIZE 10
 # endif
 
 char	*get_next_line(int fd);
-int		ft_strlen(const char *str);
-char	*new_join(char *line, char *buf);
-int		search_int(char *buf, int c);
-void	shift_buf(char *buf, int max);
-void	*ft_memset(void *str, int c, size_t n);
+char	*ft_strjoin(char *line, char *buf);
+int		ft_strlen(char *str);
 
 #endif
